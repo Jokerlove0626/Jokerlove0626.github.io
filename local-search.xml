@@ -17,13 +17,31 @@
   
   
   <entry>
-    <title>我的第一篇题解</title>
+    <title>我的第一篇算法题解</title>
     <link href="/2024/05/20/1/"/>
     <url>/2024/05/20/1/</url>
     
-    <content type="html"><![CDATA[<p>这是行内公式： $a+b&#x3D;c$ </p><p>这是块级公式：<br>$$<br>a+b&#x3D;c<br>$$</p>]]></content>
+    <content type="html"><![CDATA[<p>这里是你的文章正文内容…</p>]]></content>
     
     
+    <categories>
+      
+      <category>算法题解</category>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>数组</tag>
+      
+    </tags>
     
   </entry>
   
