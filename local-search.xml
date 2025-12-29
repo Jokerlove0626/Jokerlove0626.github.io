@@ -4,11 +4,42 @@
   
   
   <entry>
+    <title>从零开始：我的 Hexo 博客搭建之旅（完结篇）</title>
+    <link href="/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/"/>
+    <url>/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/</url>
+    
+    <content type="html"><![CDATA[<h2 id="搭建博客的初衷">📝 搭建博客的初衷</h2><p>在信息碎片化的时代，我为什么选择费力搭建一个独立博客？</p><ol type="1"><li><strong>构建知识体系</strong>：写给别人看是最好的学习方式（费曼学习法）。当我要把一个算法逻辑讲清楚时，我才真正掌握了它。</li><li><strong>拒绝“拿来主义”</strong>：在 AI时代，获取答案变得太容易，但思考的过程变得太稀缺。这里是我强制自己沉淀思考、拒绝直接复制粘贴的阵地。</li><li><strong>技术自由度</strong>：独立博客意味着我可以自由决定公式怎么显示、代码怎么高亮、评论怎么互动。这种“掌控感”是任何平台都给不了的。</li></ol><hr /><h2 id="核心架构方案">🛠 核心架构方案</h2><p>为了兼顾美观与功能，我最终锁定了这套黄金组合： -<strong>框架</strong>: <a href="https://hexo.io/">Hexo</a> -<strong>主题</strong>: <ahref="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a>(现代优雅的 Material Design 风格) - <strong>渲染引擎</strong>:<strong>Pandoc 3.8.3</strong>(放弃了不稳定的插件，采用专业级文档转换工具) -<strong>托管平台</strong>: GitHub Pages</p><hr /><h2 id="攻克数学公式渲染从报错到完美">🔥攻克数学公式渲染：从报错到完美</h2><p>这是搭建过程中最难的一关。最初使用默认渲染器时，LaTeX 的转义符号（如<code>_</code> 和 <code>\\</code>）经常被误处理，导致公式“炸裂”。</p><h3 id="为什么选择-pandoc">为什么选择 Pandoc？</h3><p>Hexo 默认的 Marked 引擎经常会把 LaTeX 的下划线误识别为 HTML斜体。经过反复测试，我采用了 <strong>Pandoc</strong>方案。它作为“文档转换界的瑞士军刀”，能原生解析 LaTeX语法，实现了零冲突渲染。</p><p><strong>渲染效果展示：</strong></p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</span></p><p>以及更复杂的矩阵运算：</p><p><span class="math display">$$\begin{pmatrix}1 &amp; 0 \\0 &amp; 1\end{pmatrix}$$</span></p><hr /><h2 id="部署与同步">🚀 部署与同步</h2><p>通过配置 Git 代理和 <code>hexo-deployer-git</code>插件，现在我只需一行命令即可将本地思考同步至全球：</p><p>```powershell hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术分享</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Fluid</tag>
+      
+      <tag>Pandoc</tag>
+      
+      <tag>LaTeX</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2025/12/29/hello-world/"/>
     <url>/2025/12/29/hello-world/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your veryfirst post. Check <a href="https://hexo.io/docs/">documentation</a> formore info. If you get any problems when using Hexo, you can find theanswer in <ahref="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> oryou can ask me on <ahref="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="quick-start">Quick Start</h2><h3 id="create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
     
@@ -17,31 +48,13 @@
   
   
   <entry>
-    <title>我的第一篇算法题解</title>
-    <link href="/2024/05/20/1/"/>
-    <url>/2024/05/20/1/</url>
+    <title>Pandoc 完美渲染测试</title>
+    <link href="/2025/12/29/math-test/"/>
+    <url>/2025/12/29/math-test/</url>
     
-    <content type="html"><![CDATA[<p>这里是你的文章正文内容…</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>算法题解</category>
-      
-      <category>LeetCode</category>
-      
-    </categories>
+    <content type="html"><![CDATA[<p>这是一段包含数学公式的文字。</p><p><strong>行内公式测试</strong>： <spanclass="math inline"><em>E</em> = <em>m</em><em>c</em><sup>2</sup></span></p><p><strong>块级公式测试</strong>：</p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</span></p><p><strong>复杂公式测试（矩阵）</strong>：</p><p><span class="math display">$$\begin{pmatrix}1 &amp; 0 \\0 &amp; 1\end{pmatrix}$$</span></p>]]></content>
     
     
-    <tags>
-      
-      <tag>动态规划</tag>
-      
-      <tag>Python</tag>
-      
-      <tag>数组</tag>
-      
-    </tags>
     
   </entry>
   
