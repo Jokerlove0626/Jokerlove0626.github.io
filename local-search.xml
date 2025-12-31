@@ -4,6 +4,68 @@
   
   
   <entry>
+    <title>LeetCode 热题 100 | 1. 两数之和</title>
+    <link href="/2025/12/30/LeetCode%E7%83%AD%E9%A2%98100-1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+    <url>/2025/12/30/LeetCode%E7%83%AD%E9%A2%98100-1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述">题目描述</h2><p>给定一个整数数组 <code>nums</code> 和一个整数目标值<code>target</code>，请你在该数组中找出 <strong>和为目标值</strong><code>target</code> 的那 <strong>两个</strong>整数，并返回它们的数组下标。</p><p><strong>限制条件：</strong> * 每种输入只会对应一个答案。 *不能使用两次相同的元素。</p><hr /><h2 id="解题思路哈希表法-hash-table">解题思路：哈希表法 (HashTable)</h2><p>为了将时间复杂度从暴力法的阶级降低，我们引入哈希表（C++ 中的<code>std::unordered_map</code>）作为辅助。</p><h3 id="核心思想">核心思想</h3><p>我们在遍历数组的同时，计算当前数字所需的“补数”。</p><p><spanclass="math display"><em>t</em><em>e</em><em>m</em><em>p</em> = <em>t</em><em>a</em><em>r</em><em>g</em><em>e</em><em>t</em> − <em>n</em><em>u</em><em>m</em><em>s</em>[<em>i</em>]</span></p><ol type="1"><li><strong>查记忆</strong>：在哈希表中查找是否存过这个 temp。</li><li><strong>做决策</strong>：<ul><li>如果找到了，说明找到了目标组合，直接返回。</li><li>如果没找到，将当前的数字存入哈希表，供后续数字查找。</li></ul></li></ol><hr /><h2 id="代码实现-c">代码实现 (C++)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-comment">// key: 数值, value: 对应的数组下标</span><br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; hashtable;<br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">// 计算当前数字所需的补数</span><br>            <span class="hljs-type">int</span> temp = target - nums[i];<br><br>            <span class="hljs-comment">// 在哈希表中查找是否存在这个补数</span><br>            <span class="hljs-keyword">auto</span> it = hashtable.<span class="hljs-built_in">find</span>(temp);<br>            <br>            <span class="hljs-keyword">if</span> (it != hashtable.<span class="hljs-built_in">end</span>()) &#123;<br>                <span class="hljs-comment">// 找到即返回：&#123;补数下标, 当前下标&#125;</span><br>                <span class="hljs-keyword">return</span> &#123;it-&gt;second, i&#125;;<br>            &#125;<br><br>            <span class="hljs-comment">// 存入当前数值及其索引</span><br>            hashtable[nums[i]] = i;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> &#123;&#125;;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="复杂度分析">复杂度分析</h2><h3 id="时间复杂度">时间复杂度</h3><p><spanclass="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>由于哈希表的查询和插入操作平均只需常数时间，我们只需遍历一次数组。</p><h3 id="空间复杂度">空间复杂度</h3><p><spanclass="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>最坏情况下需要将数组中的 n 个元素全部存入哈希表。</p><hr /><h2 id="总结">总结</h2><p>在 C++ 中处理这类“寻找特定配对”的问题时，使用<code>std::unordered_map</code>是典型的<strong>空间换时间</strong>策略。</p><p><strong>关键点提醒：</strong></p><ul><li><strong>为什么是 <spanclass="math inline"><em>O</em>(<em>n</em>)</span>？</strong>因为哈希表将搜索的时间从 O(n) 降到了 O(1)。</li><li><strong>避免自匹配</strong>：代码逻辑是“先查找，后存入”，这确保了nums[i] 不会和它自己匹配。</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>算法</tag>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>哈希表</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++ 遇见 WebAssembly：基于 Raylib 打造高性能 Web 游戏实验室 TinyPulse</title>
+    <link href="/2025/12/30/%E5%9F%BA%E4%BA%8E%20Raylib%20%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%20Web%20%E6%B8%B8%E6%88%8F%E5%AE%9E%E9%AA%8C%E5%AE%A4%20TinyPulse/"/>
+    <url>/2025/12/30/%E5%9F%BA%E4%BA%8E%20Raylib%20%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%20Web%20%E6%B8%B8%E6%88%8F%E5%AE%9E%E9%AA%8C%E5%AE%A4%20TinyPulse/</url>
+    
+    <content type="html"><![CDATA[<p>这里开始写你的正文内容…</p><h2 id="前言">📌 前言</h2><p>为什么要在浏览器里跑 C++？</p><p>在 JavaScript 统治 Web 的今天，高性能计算和底层图形渲染依然是 JS的痛点。通过 <strong>WebAssembly (Wasm)</strong>，我们可以将 C++的原生性能带入浏览器。本文将分享我如何利用 <strong>Raylib</strong> 库与<strong>Emscripten</strong> 工具链，构建一个名为<strong>TinyPulse</strong> 的高性能 Web 游戏实验室。</p><hr /><h2 id="技术栈硬核骨架">🛠️ 技术栈：硬核骨架</h2><p>本项目不依赖传统的高级 Web 引擎，而是直接从底层构建：</p><ul><li><strong>核心逻辑</strong>：C++11/14（负责游戏引擎核心、碰撞检测与逻辑更新）</li><li><strong>图形渲染</strong>：<ahref="https://www.raylib.com/">Raylib</a>（极简、跨平台的原生图形库）</li><li><strong>编译链路</strong>：Emscripten SDK（将 C++ 代码交叉编译为<code>.wasm</code> 二进制流与胶水 JS）</li><li><strong>前端外壳</strong>：HTML5 / CSS3（赛博朋克风格 UI）+JavaScript（负责宿主环境通信）</li></ul><hr /><h2 id="核心实现从桌面端到浏览器的跨越">🚀核心实现：从桌面端到浏览器的跨越</h2><h3 id="异步主循环的挑战">1. 异步主循环的挑战</h3><p>传统的 C++ 游戏使用 <code>while(!WindowShouldClose())</code>的死循环，但这会阻塞浏览器的 UI 渲染线程。利用 Emscripten 的<code>ASYNCIFY</code> 或<code>emscripten_set_main_loop</code>，我成功实现了执行流的平滑托管。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 关键编译指令</span><br>emcc main.cpp -o index.js -lraylib -s ASYNCIFY -DPLATFORM_WEB<br></code></pre></td></tr></table></figure><h3 id="视觉进化cyber-neon-配色方案">2. 视觉进化：Cyber Neon配色方案</h3><p>为了让项目具备更强的工程质感，我重新设计了俄罗斯方块的配色方案。通过自定义<code>Color</code>数组与高亮边框逻辑，在黑色底噪背景上实现了霓虹发光质感：</p><p>C++</p><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs hsp"><span class="hljs-keyword">Color</span> shapeColors[<span class="hljs-number">8</span>] = &#123;<br>    &#123;<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">255</span>&#125;,     <span class="hljs-comment">// 背景深灰</span><br>    &#123; <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;,  <span class="hljs-comment">// I - 电光青 (Cyan)</span><br>    &#123; <span class="hljs-number">180</span>, <span class="hljs-number">50</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;, <span class="hljs-comment">// T - 幻影紫 (Purple)</span><br>    &#123; <span class="hljs-number">255</span>, <span class="hljs-number">30</span>, <span class="hljs-number">90</span>, <span class="hljs-number">255</span> &#125;   <span class="hljs-comment">// Z - 赛博粉 (Pink)</span><br>&#125;<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure><hr /><h2 id="避坑指南wasm-开发中的幽灵">⚠️ 避坑指南：Wasm 开发中的“幽灵”</h2><p>在开发过程中，我解决了几个困扰跨平台开发的典型难题：</p><h3 id="像素模糊与缩放失真">像素模糊与缩放失真</h3><p>Wasm 画布在不同 DPI 的浏览器中容易出现亚像素模糊。通过 CSS 强力注入<code>image-rendering: pixelated;</code> 并配合 800x600的强制物理对齐，确保了像素级锐利的显示效果。</p><h3 id="浏览器默认行为冲突">浏览器默认行为冲突</h3><p>网页端玩游戏最烦人的就是按方向键或空格键时页面会随之滚动。我通过在C++ 中嵌入 <code>EM_ASM</code> 宏，直接在宿主环境拦截了特定 KeyCode的默认行为：</p><p>C++</p><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lisp">#if defined(<span class="hljs-name">PLATFORM_WEB</span>)<br>    EM_ASM(&#123;<br>        window.addEventListener(<span class="hljs-string">&quot;keydown&quot;</span>, function(<span class="hljs-name">e</span>) &#123;<br>            if([<span class="hljs-number">32</span>, <span class="hljs-number">37</span>, <span class="hljs-number">38</span>, <span class="hljs-number">39</span>, <span class="hljs-number">40</span>].indexOf(<span class="hljs-name">e</span>.keyCode) &gt; <span class="hljs-number">-1</span>) e.preventDefault()<span class="hljs-comment">;</span><br>        &#125;, false)<span class="hljs-comment">;</span><br>    &#125;)<span class="hljs-comment">;</span><br>#endif<br></code></pre></td></tr></table></figure><hr /><h2 id="交互设计不仅仅是复刻游戏">🎨 交互设计：不仅仅是复刻游戏</h2><p>作为一个“实验室”项目，<strong>TinyPulse</strong>拥有一套完整的黑金科技感 UI 方案：</p><ol type="1"><li><strong>启动加载页</strong>：利用 CSS 动画缓解 Wasm二进制文件下载时的“白屏焦虑”。</li><li><strong>双向通信系统</strong>：实现了 C++ 游戏得分实时穿透 Iframe容器，与父页面 JavaScript 同步，并利用 <code>localStorage</code>进行本地持久化存储。</li></ol><hr /><h2 id="结语">🏆 结语</h2><p><strong>TinyPulse</strong> 是我对 <strong>“底层性能 + 现代 Web部署”</strong> 的一次闭环实践。它证明了即便在浏览器中，我们依然可以通过C++ 找回那种掌控每一个像素、每一帧频率的自由。</p><blockquote><p><strong>项目体验地址</strong>：<ahref="https://www.google.com/search?q=https://jokerlove0626.github.io/TinyPulse/">https://jokerlove0626.github.io/TinyPulse/</a></p><p><strong>GitHub 仓库</strong>：<ahref="https://www.google.com/search?q=https://github.com/Jokerlove0626/TinyPulse">Jokerlove0626/TinyPulse</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术实践</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>WebAssembly</tag>
+      
+      <tag>Raylib</tag>
+      
+      <tag>游戏开发</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>从零开始：我的 Hexo 博客搭建之旅（完结篇）</title>
     <link href="/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/"/>
     <url>/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/</url>
@@ -29,32 +91,6 @@
       <tag>LaTeX</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2025/12/29/hello-world/"/>
-    <url>/2025/12/29/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your veryfirst post. Check <a href="https://hexo.io/docs/">documentation</a> formore info. If you get any problems when using Hexo, you can find theanswer in <ahref="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> oryou can ask me on <ahref="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="quick-start">Quick Start</h2><h3 id="create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <ahref="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Pandoc 完美渲染测试</title>
-    <link href="/2025/12/29/math-test/"/>
-    <url>/2025/12/29/math-test/</url>
-    
-    <content type="html"><![CDATA[<p>这是一段包含数学公式的文字。</p><p><strong>行内公式测试</strong>： <spanclass="math inline"><em>E</em> = <em>m</em><em>c</em><sup>2</sup></span></p><p><strong>块级公式测试</strong>：</p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</span></p><p><strong>复杂公式测试（矩阵）</strong>：</p><p><span class="math display">$$\begin{pmatrix}1 &amp; 0 \\0 &amp; 1\end{pmatrix}$$</span></p>]]></content>
-    
-    
     
   </entry>
   
