@@ -19,28 +19,27 @@
   <meta name="author" content="Jokerlove">
   <meta name="keywords" content="">
   
-    <meta name="description" content="🚀 题目描述 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。 Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.">
+    <meta name="description" content="📝 题目描述  给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 请注意：必须在不复制数组的情况下原地对数组进行操作。 Given an integer array nums, move all 0’s to the end of it while maintaining the relative order of the non-zer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 热题 100 | 128. 最长连续序列">
-<meta property="og:url" content="http://example.com/2026/01/04/LeetCode%E7%83%AD%E9%A2%98100-128%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:title" content="LeetCode 热题 100 | 283. 移动零">
+<meta property="og:url" content="http://example.com/2026/01/05/LeetCode%E7%83%AD%E9%A2%98100-283%E7%A7%BB%E5%8A%A8%E9%9B%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="🚀 题目描述 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。 Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.">
+<meta property="og:description" content="📝 题目描述  给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 请注意：必须在不复制数组的情况下原地对数组进行操作。 Given an integer array nums, move all 0’s to the end of it while maintaining the relative order of the non-zer">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/LeetCode100.png">
-<meta property="article:published_time" content="2026-01-04T14:15:00.000Z">
-<meta property="article:modified_time" content="2026-01-04T12:51:06.724Z">
+<meta property="article:published_time" content="2026-01-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-05T14:50:39.407Z">
 <meta property="article:author" content="Jokerlove">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="C++">
-<meta property="article:tag" content="哈希表">
-<meta property="article:tag" content="深度解析">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/img/LeetCode100.png">
   
   
   
-  <title>LeetCode 热题 100 | 128. 最长连续序列 - Hexo</title>
+  <title>LeetCode 热题 100 | 283. 移动零 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LeetCode 热题 100 | 128. 最长连续序列"></span>
+            <span id="subtitle" data-typed-text="LeetCode 热题 100 | 283. 移动零"></span>
           
         </div>
 
@@ -217,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-04 22:15" pubdate>
-          January 4, 2026 pm
+        <time datetime="2026-01-05 10:00" pubdate>
+          January 5, 2026 am
         </time>
       </span>
     
@@ -229,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          594 words
+          532 words
         
       </span>
     
@@ -277,63 +276,53 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LeetCode 热题 100 | 128. 最长连续序列</h1>
+            <h1 id="seo-header">LeetCode 热题 100 | 283. 移动零</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="题目描述">🚀 题目描述</h2>
-<p>给定一个未排序的整数数组 <code>nums</code>
-，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</p>
-<p>请你设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
-<p>Given an unsorted array of integers <code>nums</code>, return <em>the
-length of the longest consecutive elements sequence.</em></p>
-<p>You must write an algorithm that runs in <code>O(n)</code> time.</p>
+                <h2 id="题目描述">📝 题目描述</h2>
+<blockquote>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code>
+移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>请注意</strong>：必须在不复制数组的情况下原地对数组进行操作。</p>
+<p>Given an integer array <code>nums</code>, move all <code>0</code>’s
+to the end of it while maintaining the relative order of the non-zero
+elements.</p>
+<p><strong>Note</strong> that you must do this in-place without making a
+copy of the array.</p>
 <p><strong>Example 1:</strong></p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">Input:</span> nums = [<span class="hljs-number">100</span>,<span class="hljs-number">4</span>,<span class="hljs-number">200</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>]<br><span class="hljs-symbol">Output:</span> <span class="hljs-number">4</span><br><span class="hljs-symbol">Explanation:</span> The longest consecutive elements sequence <span class="hljs-built_in">is</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]. Therefore its length <span class="hljs-built_in">is</span> <span class="hljs-number">4</span>.<br></code></pre></td></tr></table></figure>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">Input: nums = <span class="hljs-string">[0,1,0,3,12]</span><br>Output: <span class="hljs-string">[1,3,12,0,0]</span><br></code></pre></td></tr></table></figure>
 <p><strong>Example 2:</strong></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [0,3,7,2,5,8,4,6,0,1]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">9</span><br></code></pre></td></tr></table></figure>
-<p><strong>Example 3:</strong></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [1,0,1,2]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
-<p><strong>Constraints:</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [0]</span><br><span class="hljs-attribute">Output</span>:<span class="hljs-meta"> [0]</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<h2 id="核心思路快慢指针">💡 核心思路：快慢指针</h2>
+<p>如何在<strong>不复制数组</strong>的前提下，原地（In-place）完成操作？这道题是理解“双指针”逻辑的最佳入门教材。</p>
+<p>我们定义两个指针 l（慢指针）和 r（快指针）： 1. <strong>慢指针
+l</strong>：指向“下一个存放非零元素”的位置。 2. <strong>快指针
+r</strong>：负责向后扫描，寻找数组中的非零元素。</p>
+<h3 id="动态演示">动态演示</h3>
+<p>当快指针 r 发现一个非零元素时： * 我们将 nums[r] 与 nums[l]
+进行交换。 * 交换后，l 向后移动一位，确保它始终指向非零区域的边界。</p>
+<h3 id="为什么这个解法很巧妙">为什么这个解法很巧妙？</h3>
 <ul>
-<li><code>0 &lt;= nums.length &lt;= 105</code></li>
-<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><strong>稳定性</strong>：由于我们是从左往右顺序扫描并交换，非零元素之间的相对顺序被完美保留。</li>
+<li><strong>零的自然处理</strong>：随着 l
+的推进，被交换到后面的元素自然而然地形成了“零池”。</li>
 </ul>
-<h3 id="核心逻辑触点合并">核心逻辑：触点合并</h3>
-<p>想象数组中的每个数字都是一个独立的点。当我们把 num
-放入集合时，它就像一根“导线”，试图连接左右两个已经存在的“通区间”。</p>
-<ol type="1">
-<li><strong>左顾右盼</strong>：
-<ul>
-<li>检查 num - 1 是否存在？若存在，获取其所在区间的长度 prev。</li>
-<li>检查 num + 1 是否存在？若存在，获取其所在区间的长度 suf。</li>
-</ul></li>
-<li><strong>瞬间合体</strong>：
-<ul>
-<li>当前数字 num 加入后，形成的全新区间长度为：</li>
-</ul>
-<span
-class="math display"><em>l</em><em>e</em><em>n</em> = <em>p</em><em>r</em><em>e</em><em>v</em> + <em>s</em><em>u</em><em>f</em> + 1</span></li>
-<li><strong>刷新边界</strong>：
-<ul>
-<li>我们并不需要更新区间内所有点的长度，<strong>只需要更新该区间的“最左端”和“最右端”</strong>。因为新加入的数字只会从边缘撞击该区间。</li>
-</ul></li>
-</ol>
 <hr />
 <h2 id="代码实现-c">💻 代码实现 (C++)</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// cnt 存储当前数值所在连续区间的总长度</span><br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; cnt;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>&amp; num : nums) &#123;<br>            <span class="hljs-comment">// 跳过重复数字，确保每个点只被处理一次</span><br>            <span class="hljs-keyword">if</span> (cnt.<span class="hljs-built_in">find</span>(num) == cnt.<span class="hljs-built_in">end</span>()) &#123;<br>                <span class="hljs-comment">// 1. 获取左右邻居的区间长度</span><br>                <span class="hljs-type">int</span> prev = cnt.<span class="hljs-built_in">count</span>(num - <span class="hljs-number">1</span>) ? cnt[num - <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>;<br>                <span class="hljs-type">int</span> suf = cnt.<span class="hljs-built_in">count</span>(num + <span class="hljs-number">1</span>) ? cnt[num + <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>;<br><br>                <span class="hljs-comment">// 2. 计算当前合并后的新区间总长度</span><br>                <span class="hljs-type">int</span> cur_len = prev + suf + <span class="hljs-number">1</span>;<br>                <br>                <span class="hljs-comment">// 3. 标记当前点已访问，并同步更新区间的左右端点</span><br>                cnt[num] = cur_len; <br>                cnt[num - prev] = cur_len; <span class="hljs-comment">// 指向左边界</span><br>                cnt[num + suf] = cur_len;  <span class="hljs-comment">// 指向右边界</span><br><br>                <span class="hljs-comment">// 4. 实时更新最大值</span><br>                ans = <span class="hljs-built_in">max</span>(ans, cur_len);<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">moveZeroes</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>; <span class="hljs-comment">// 慢指针：指向已处理序列的尾部</span><br>        <span class="hljs-type">int</span> r = <span class="hljs-number">0</span>; <span class="hljs-comment">// 快指针：指向待处理序列的头部</span><br>        <br>        <span class="hljs-keyword">while</span>(r &lt; n) &#123;<br>            <span class="hljs-comment">// 当快指针遇到非零元素时</span><br>            <span class="hljs-keyword">if</span>(nums[r] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 交换快慢指针指向的内容</span><br>                <span class="hljs-keyword">if</span>(r &gt; l) &#123;<br>                    <span class="hljs-built_in">swap</span>(nums[r], nums[l]);<br>                &#125;<br>                <span class="hljs-comment">// 慢指针前进，扩大非零区间</span><br>                l++;<br>            &#125;<br>            <span class="hljs-comment">// 快指针始终前进</span><br>            r++;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="复杂度分析">📊 复杂度分析</h2>
 <h3 id="时间复杂度">时间复杂度</h3>
 <p><span
 class="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p>
-<p>由于 <code>unordered_map</code> 的操作平均为常数时间，且通过
-<code>if</code>
-逻辑确保了每个数字仅被处理一次，整段代码实现了真正的线性扫描。</p>
+<p>我们仅对数组进行了一次遍历，每个元素最多被交换一次。</p>
 <h3 id="空间复杂度">空间复杂度</h3>
 <p><span
-class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p>
-<p>最坏情况下，哈希表需要存储所有不重复的数字。</p>
+class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(1)</span></p>
+<p>直接在原数组上操作，仅使用了两个整型变量作为指针，满足题目要求的“原地”操作。</p>
 
                 
               </div>
@@ -373,9 +362,7 @@ class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span><
       
         <a href="/tags/C/" class="print-no-link">#C++</a>
       
-        <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" class="print-no-link">#哈希表</a>
-      
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" class="print-no-link">#深度解析</a>
+        <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" class="print-no-link">#双指针</a>
       
     </div>
   
@@ -387,8 +374,8 @@ class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span><
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LeetCode 热题 100 | 128. 最长连续序列</div>
-      <div>http://example.com/2026/01/04/LeetCode热题100-128最长连续序列/</div>
+      <div>LeetCode 热题 100 | 283. 移动零</div>
+      <div>http://example.com/2026/01/05/LeetCode热题100-283移动零/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +387,7 @@ class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span><
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 4, 2026</div>
+          <div>January 5, 2026</div>
         </div>
       
       
@@ -432,18 +419,12 @@ class="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span><
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/05/LeetCode%E7%83%AD%E9%A2%98100-283%E7%A7%BB%E5%8A%A8%E9%9B%B6/" title="LeetCode 热题 100 | 283. 移动零">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode 热题 100 | 283. 移动零</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/03/LeetCaode%E7%83%AD%E9%A2%98100-49%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/" title="LeetCode 热题 100 | 49. 字母异位词分组 (Group Anagrams)">
-                        <span class="hidden-mobile">LeetCode 热题 100 | 49. 字母异位词分组 (Group Anagrams)</span>
+                      <a href="/2026/01/04/LeetCode%E7%83%AD%E9%A2%98100-128%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/" title="LeetCode 热题 100 | 128. 最长连续序列">
+                        <span class="hidden-mobile">LeetCode 热题 100 | 128. 最长连续序列</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
