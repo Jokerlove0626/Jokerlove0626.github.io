@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>LeetCode 热题 100 | 283. 移动零</title>
+    <link href="/2026/01/05/LeetCode%E7%83%AD%E9%A2%98100-283%E7%A7%BB%E5%8A%A8%E9%9B%B6/"/>
+    <url>/2026/01/05/LeetCode%E7%83%AD%E9%A2%98100-283%E7%A7%BB%E5%8A%A8%E9%9B%B6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述">📝 题目描述</h2><blockquote><p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code>移动到数组的末尾，同时保持非零元素的相对顺序。</p><p><strong>请注意</strong>：必须在不复制数组的情况下原地对数组进行操作。</p><p>Given an integer array <code>nums</code>, move all <code>0</code>’sto the end of it while maintaining the relative order of the non-zeroelements.</p><p><strong>Note</strong> that you must do this in-place without making acopy of the array.</p><p><strong>Example 1:</strong></p><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">Input: nums = <span class="hljs-string">[0,1,0,3,12]</span><br>Output: <span class="hljs-string">[1,3,12,0,0]</span><br></code></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [0]</span><br><span class="hljs-attribute">Output</span>:<span class="hljs-meta"> [0]</span><br></code></pre></td></tr></table></figure></blockquote><hr /><h2 id="核心思路快慢指针">💡 核心思路：快慢指针</h2><p>如何在<strong>不复制数组</strong>的前提下，原地（In-place）完成操作？这道题是理解“双指针”逻辑的最佳入门教材。</p><p>我们定义两个指针 l（慢指针）和 r（快指针）： 1. <strong>慢指针l</strong>：指向“下一个存放非零元素”的位置。 2. <strong>快指针r</strong>：负责向后扫描，寻找数组中的非零元素。</p><h3 id="动态演示">动态演示</h3><p>当快指针 r 发现一个非零元素时： * 我们将 nums[r] 与 nums[l]进行交换。 * 交换后，l 向后移动一位，确保它始终指向非零区域的边界。</p><h3 id="为什么这个解法很巧妙">为什么这个解法很巧妙？</h3><ul><li><strong>稳定性</strong>：由于我们是从左往右顺序扫描并交换，非零元素之间的相对顺序被完美保留。</li><li><strong>零的自然处理</strong>：随着 l的推进，被交换到后面的元素自然而然地形成了“零池”。</li></ul><hr /><h2 id="代码实现-c">💻 代码实现 (C++)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">moveZeroes</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>; <span class="hljs-comment">// 慢指针：指向已处理序列的尾部</span><br>        <span class="hljs-type">int</span> r = <span class="hljs-number">0</span>; <span class="hljs-comment">// 快指针：指向待处理序列的头部</span><br>        <br>        <span class="hljs-keyword">while</span>(r &lt; n) &#123;<br>            <span class="hljs-comment">// 当快指针遇到非零元素时</span><br>            <span class="hljs-keyword">if</span>(nums[r] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 交换快慢指针指向的内容</span><br>                <span class="hljs-keyword">if</span>(r &gt; l) &#123;<br>                    <span class="hljs-built_in">swap</span>(nums[r], nums[l]);<br>                &#125;<br>                <span class="hljs-comment">// 慢指针前进，扩大非零区间</span><br>                l++;<br>            &#125;<br>            <span class="hljs-comment">// 快指针始终前进</span><br>            r++;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="复杂度分析">📊 复杂度分析</h2><h3 id="时间复杂度">时间复杂度</h3><p><spanclass="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>我们仅对数组进行了一次遍历，每个元素最多被交换一次。</p><h3 id="空间复杂度">空间复杂度</h3><p><spanclass="math display"><em>S</em>(<em>n</em>) = <em>O</em>(1)</span></p><p>直接在原数组上操作，仅使用了两个整型变量作为指针，满足题目要求的“原地”操作。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>双指针</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>LeetCode 热题 100 | 128. 最长连续序列</title>
+    <link href="/2026/01/04/LeetCode%E7%83%AD%E9%A2%98100-128%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/"/>
+    <url>/2026/01/04/LeetCode%E7%83%AD%E9%A2%98100-128%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述">🚀 题目描述</h2><p>给定一个未排序的整数数组 <code>nums</code>，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</p><p>请你设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p><p>Given an unsorted array of integers <code>nums</code>, return <em>thelength of the longest consecutive elements sequence.</em></p><p>You must write an algorithm that runs in <code>O(n)</code> time.</p><p><strong>Example 1:</strong></p><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">Input:</span> nums = [<span class="hljs-number">100</span>,<span class="hljs-number">4</span>,<span class="hljs-number">200</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>]<br><span class="hljs-symbol">Output:</span> <span class="hljs-number">4</span><br><span class="hljs-symbol">Explanation:</span> The longest consecutive elements sequence <span class="hljs-built_in">is</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]. Therefore its length <span class="hljs-built_in">is</span> <span class="hljs-number">4</span>.<br></code></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [0,3,7,2,5,8,4,6,0,1]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">9</span><br></code></pre></td></tr></table></figure><p><strong>Example 3:</strong></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: nums =<span class="hljs-meta"> [1,0,1,2]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure><p><strong>Constraints:</strong></p><ul><li><code>0 &lt;= nums.length &lt;= 105</code></li><li><code>-109 &lt;= nums[i] &lt;= 109</code></li></ul><h3 id="核心逻辑触点合并">核心逻辑：触点合并</h3><p>想象数组中的每个数字都是一个独立的点。当我们把 num放入集合时，它就像一根“导线”，试图连接左右两个已经存在的“通区间”。</p><ol type="1"><li><strong>左顾右盼</strong>：<ul><li>检查 num - 1 是否存在？若存在，获取其所在区间的长度 prev。</li><li>检查 num + 1 是否存在？若存在，获取其所在区间的长度 suf。</li></ul></li><li><strong>瞬间合体</strong>：<ul><li>当前数字 num 加入后，形成的全新区间长度为：</li></ul><spanclass="math display"><em>l</em><em>e</em><em>n</em> = <em>p</em><em>r</em><em>e</em><em>v</em> + <em>s</em><em>u</em><em>f</em> + 1</span></li><li><strong>刷新边界</strong>：<ul><li>我们并不需要更新区间内所有点的长度，<strong>只需要更新该区间的“最左端”和“最右端”</strong>。因为新加入的数字只会从边缘撞击该区间。</li></ul></li></ol><hr /><h2 id="代码实现-c">💻 代码实现 (C++)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// cnt 存储当前数值所在连续区间的总长度</span><br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; cnt;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>&amp; num : nums) &#123;<br>            <span class="hljs-comment">// 跳过重复数字，确保每个点只被处理一次</span><br>            <span class="hljs-keyword">if</span> (cnt.<span class="hljs-built_in">find</span>(num) == cnt.<span class="hljs-built_in">end</span>()) &#123;<br>                <span class="hljs-comment">// 1. 获取左右邻居的区间长度</span><br>                <span class="hljs-type">int</span> prev = cnt.<span class="hljs-built_in">count</span>(num - <span class="hljs-number">1</span>) ? cnt[num - <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>;<br>                <span class="hljs-type">int</span> suf = cnt.<span class="hljs-built_in">count</span>(num + <span class="hljs-number">1</span>) ? cnt[num + <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>;<br><br>                <span class="hljs-comment">// 2. 计算当前合并后的新区间总长度</span><br>                <span class="hljs-type">int</span> cur_len = prev + suf + <span class="hljs-number">1</span>;<br>                <br>                <span class="hljs-comment">// 3. 标记当前点已访问，并同步更新区间的左右端点</span><br>                cnt[num] = cur_len; <br>                cnt[num - prev] = cur_len; <span class="hljs-comment">// 指向左边界</span><br>                cnt[num + suf] = cur_len;  <span class="hljs-comment">// 指向右边界</span><br><br>                <span class="hljs-comment">// 4. 实时更新最大值</span><br>                ans = <span class="hljs-built_in">max</span>(ans, cur_len);<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="复杂度分析">📊 复杂度分析</h2><h3 id="时间复杂度">时间复杂度</h3><p><spanclass="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>由于 <code>unordered_map</code> 的操作平均为常数时间，且通过<code>if</code>逻辑确保了每个数字仅被处理一次，整段代码实现了真正的线性扫描。</p><h3 id="空间复杂度">空间复杂度</h3><p><spanclass="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>最坏情况下，哈希表需要存储所有不重复的数字。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>哈希表</tag>
+      
+      <tag>深度解析</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>LeetCode 热题 100 | 49. 字母异位词分组 (Group Anagrams)</title>
+    <link href="/2026/01/03/LeetCaode%E7%83%AD%E9%A2%98100-49%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/"/>
+    <url>/2026/01/03/LeetCaode%E7%83%AD%E9%A2%98100-49%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述">题目描述</h2><p>给你一个字符串数组 <code>strs</code> ，请你将<strong>字母异位词</strong> 组合在一起。可以按任意顺序返回结果列表。</p><p><strong>字母异位词</strong>是由重新排列源单词的所有字母得到的一个新单词（通常每个字母使用次数必须相同）。</p><p>Given an array of strings <code>strs</code>, group the anagramstogether. You can return the answer in <strong>any order</strong>.</p><hr /><h2 id="解题思路哈希表-排序-sorting">解题思路：哈希表 + 排序(Sorting)</h2><p>这道题的核心在于：<strong>如何高效地判断两个字符串是否是字母异位词？</strong></p><h3 id="核心逻辑">核心逻辑</h3><p>字母异位词虽然字符顺序不同，但如果对它们进行 <strong>排序(Sort)</strong>，得到的结果一定是完全相同的。例如： * <code>"eat"</code>排序后为 <code>"aet"</code> * <code>"tea"</code> 排序后为<code>"aet"</code> * <code>"ate"</code> 排序后为 <code>"aet"</code></p><p>因此，我们可以将 <strong>“排序后的字符串”</strong>作为哈希表（<code>std::unordered_map</code>）的 <strong>Key</strong>，将<strong>“原始字符串组成的数组”</strong> 作为<strong>Value</strong>。</p><h3 id="算法步骤">算法步骤</h3><ol type="1"><li>遍历字符串数组 <code>strs</code>。</li><li>对于每个字符串，先拷贝一份并进行排序，得到 <code>key</code>。</li><li>将原始字符串存入 <code>mp[key]</code> 对应的 <code>vector</code>中。</li><li>遍历完成后，将哈希表中所有的 <code>vector</code>提取出来即为最终答案。</li></ol><hr /><h2 id="代码实现-c">代码实现 (C++)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;<br>        <span class="hljs-comment">// key: 排序后的字符串, value: 属于该分组的所有原始字符串</span><br>        unordered_map&lt;string, vector&lt;string&gt;&gt; mp;<br><br>        <span class="hljs-keyword">for</span>(string&amp; str : strs) &#123;<br>            string k = str;<br>            <span class="hljs-comment">// 关键点：排序后的字符串是唯一的标识符</span><br>            <span class="hljs-built_in">sort</span>(k.<span class="hljs-built_in">begin</span>(), k.<span class="hljs-built_in">end</span>());<br>            mp[k].<span class="hljs-built_in">emplace_back</span>(str);<br>        &#125;<br><br>        vector&lt;vector&lt;string&gt;&gt; ans;<br>        <span class="hljs-comment">// 提取哈希表中的所有结果</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it = mp.<span class="hljs-built_in">begin</span>(); it != mp.<span class="hljs-built_in">end</span>(); ++it) &#123;<br>            ans.<span class="hljs-built_in">emplace_back</span>(it-&gt;second);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="复杂度分析">复杂度分析</h2><h3 id="时间复杂度">时间复杂度</h3><p><spanclass="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em> ⋅ <em>k</em>log <em>k</em>)</span></p><p>其中 n是字符串数组的长度，k是字符串的最大长度。我们需要遍历n个字符串，每个字符串排序的时间复杂度是 O(k log k)。</p><h3 id="空间复杂度">空间复杂度</h3><p><spanclass="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em> ⋅ <em>k</em>)</span></p><p>我们需要哈希表来存储所有的字符串。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>哈希表</tag>
+      
+      <tag>字符串</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>LeetCode 热题 100 | 1. 两数之和</title>
+    <link href="/2025/12/30/LeetCode%E7%83%AD%E9%A2%98100-1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+    <url>/2025/12/30/LeetCode%E7%83%AD%E9%A2%98100-1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述">题目描述</h2><p>给定一个整数数组 <code>nums</code> 和一个整数目标值<code>target</code>，请你在该数组中找出 <strong>和为目标值</strong><code>target</code> 的那 <strong>两个</strong>整数，并返回它们的数组下标。</p><p><strong>限制条件：</strong> * 每种输入只会对应一个答案。 *不能使用两次相同的元素。</p><hr /><h2 id="解题思路哈希表法-hash-table">解题思路：哈希表法 (HashTable)</h2><p>为了将时间复杂度从暴力法的阶级降低，我们引入哈希表（C++ 中的<code>std::unordered_map</code>）作为辅助。</p><h3 id="核心思想">核心思想</h3><p>我们在遍历数组的同时，计算当前数字所需的“补数”。</p><p><spanclass="math display"><em>t</em><em>e</em><em>m</em><em>p</em> = <em>t</em><em>a</em><em>r</em><em>g</em><em>e</em><em>t</em> − <em>n</em><em>u</em><em>m</em><em>s</em>[<em>i</em>]</span></p><ol type="1"><li><strong>查记忆</strong>：在哈希表中查找是否存过这个 temp。</li><li><strong>做决策</strong>：<ul><li>如果找到了，说明找到了目标组合，直接返回。</li><li>如果没找到，将当前的数字存入哈希表，供后续数字查找。</li></ul></li></ol><hr /><h2 id="代码实现-c">代码实现 (C++)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-comment">// key: 数值, value: 对应的数组下标</span><br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; hashtable;<br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">// 计算当前数字所需的补数</span><br>            <span class="hljs-type">int</span> temp = target - nums[i];<br><br>            <span class="hljs-comment">// 在哈希表中查找是否存在这个补数</span><br>            <span class="hljs-keyword">auto</span> it = hashtable.<span class="hljs-built_in">find</span>(temp);<br>            <br>            <span class="hljs-keyword">if</span> (it != hashtable.<span class="hljs-built_in">end</span>()) &#123;<br>                <span class="hljs-comment">// 找到即返回：&#123;补数下标, 当前下标&#125;</span><br>                <span class="hljs-keyword">return</span> &#123;it-&gt;second, i&#125;;<br>            &#125;<br><br>            <span class="hljs-comment">// 存入当前数值及其索引</span><br>            hashtable[nums[i]] = i;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> &#123;&#125;;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="复杂度分析">复杂度分析</h2><h3 id="时间复杂度">时间复杂度</h3><p><spanclass="math display"><em>T</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>由于哈希表的查询和插入操作平均只需常数时间，我们只需遍历一次数组。</p><h3 id="空间复杂度">空间复杂度</h3><p><spanclass="math display"><em>S</em>(<em>n</em>) = <em>O</em>(<em>n</em>)</span></p><p>最坏情况下需要将数组中的 n 个元素全部存入哈希表。</p><hr /><h2 id="总结">总结</h2><p>在 C++ 中处理这类“寻找特定配对”的问题时，使用<code>std::unordered_map</code>是典型的<strong>空间换时间</strong>策略。</p><p><strong>关键点提醒：</strong></p><ul><li><strong>为什么是 <spanclass="math inline"><em>O</em>(<em>n</em>)</span>？</strong>因为哈希表将搜索的时间从 O(n) 降到了 O(1)。</li><li><strong>避免自匹配</strong>：代码逻辑是“先查找，后存入”，这确保了nums[i] 不会和它自己匹配。</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>哈希表</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++ 遇见 WebAssembly：基于 Raylib 打造高性能 Web 游戏实验室 TinyPulse</title>
+    <link href="/2025/12/30/%E5%9F%BA%E4%BA%8E%20Raylib%20%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%20Web%20%E6%B8%B8%E6%88%8F%E5%AE%9E%E9%AA%8C%E5%AE%A4%20TinyPulse/"/>
+    <url>/2025/12/30/%E5%9F%BA%E4%BA%8E%20Raylib%20%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%20Web%20%E6%B8%B8%E6%88%8F%E5%AE%9E%E9%AA%8C%E5%AE%A4%20TinyPulse/</url>
+    
+    <content type="html"><![CDATA[<p>这里开始写你的正文内容…</p><h2 id="前言">📌 前言</h2><p>为什么要在浏览器里跑 C++？</p><p>在 JavaScript 统治 Web 的今天，高性能计算和底层图形渲染依然是 JS的痛点。通过 <strong>WebAssembly (Wasm)</strong>，我们可以将 C++的原生性能带入浏览器。本文将分享我如何利用 <strong>Raylib</strong> 库与<strong>Emscripten</strong> 工具链，构建一个名为<strong>TinyPulse</strong> 的高性能 Web 游戏实验室。</p><hr /><h2 id="技术栈硬核骨架">🛠️ 技术栈：硬核骨架</h2><p>本项目不依赖传统的高级 Web 引擎，而是直接从底层构建：</p><ul><li><strong>核心逻辑</strong>：C++11/14（负责游戏引擎核心、碰撞检测与逻辑更新）</li><li><strong>图形渲染</strong>：<ahref="https://www.raylib.com/">Raylib</a>（极简、跨平台的原生图形库）</li><li><strong>编译链路</strong>：Emscripten SDK（将 C++ 代码交叉编译为<code>.wasm</code> 二进制流与胶水 JS）</li><li><strong>前端外壳</strong>：HTML5 / CSS3（赛博朋克风格 UI）+JavaScript（负责宿主环境通信）</li></ul><hr /><h2 id="核心实现从桌面端到浏览器的跨越">🚀核心实现：从桌面端到浏览器的跨越</h2><h3 id="异步主循环的挑战">1. 异步主循环的挑战</h3><p>传统的 C++ 游戏使用 <code>while(!WindowShouldClose())</code>的死循环，但这会阻塞浏览器的 UI 渲染线程。利用 Emscripten 的<code>ASYNCIFY</code> 或<code>emscripten_set_main_loop</code>，我成功实现了执行流的平滑托管。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 关键编译指令</span><br>emcc main.cpp -o index.js -lraylib -s ASYNCIFY -DPLATFORM_WEB<br></code></pre></td></tr></table></figure><h3 id="视觉进化cyber-neon-配色方案">2. 视觉进化：Cyber Neon配色方案</h3><p>为了让项目具备更强的工程质感，我重新设计了俄罗斯方块的配色方案。通过自定义<code>Color</code>数组与高亮边框逻辑，在黑色底噪背景上实现了霓虹发光质感：</p><p>C++</p><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs hsp"><span class="hljs-keyword">Color</span> shapeColors[<span class="hljs-number">8</span>] = &#123;<br>    &#123;<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">255</span>&#125;,     <span class="hljs-comment">// 背景深灰</span><br>    &#123; <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;,  <span class="hljs-comment">// I - 电光青 (Cyan)</span><br>    &#123; <span class="hljs-number">180</span>, <span class="hljs-number">50</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;, <span class="hljs-comment">// T - 幻影紫 (Purple)</span><br>    &#123; <span class="hljs-number">255</span>, <span class="hljs-number">30</span>, <span class="hljs-number">90</span>, <span class="hljs-number">255</span> &#125;   <span class="hljs-comment">// Z - 赛博粉 (Pink)</span><br>&#125;<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure><hr /><h2 id="避坑指南wasm-开发中的幽灵">⚠️ 避坑指南：Wasm 开发中的“幽灵”</h2><p>在开发过程中，我解决了几个困扰跨平台开发的典型难题：</p><h3 id="像素模糊与缩放失真">像素模糊与缩放失真</h3><p>Wasm 画布在不同 DPI 的浏览器中容易出现亚像素模糊。通过 CSS 强力注入<code>image-rendering: pixelated;</code> 并配合 800x600的强制物理对齐，确保了像素级锐利的显示效果。</p><h3 id="浏览器默认行为冲突">浏览器默认行为冲突</h3><p>网页端玩游戏最烦人的就是按方向键或空格键时页面会随之滚动。我通过在C++ 中嵌入 <code>EM_ASM</code> 宏，直接在宿主环境拦截了特定 KeyCode的默认行为：</p><p>C++</p><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lisp">#if defined(<span class="hljs-name">PLATFORM_WEB</span>)<br>    EM_ASM(&#123;<br>        window.addEventListener(<span class="hljs-string">&quot;keydown&quot;</span>, function(<span class="hljs-name">e</span>) &#123;<br>            if([<span class="hljs-number">32</span>, <span class="hljs-number">37</span>, <span class="hljs-number">38</span>, <span class="hljs-number">39</span>, <span class="hljs-number">40</span>].indexOf(<span class="hljs-name">e</span>.keyCode) &gt; <span class="hljs-number">-1</span>) e.preventDefault()<span class="hljs-comment">;</span><br>        &#125;, false)<span class="hljs-comment">;</span><br>    &#125;)<span class="hljs-comment">;</span><br>#endif<br></code></pre></td></tr></table></figure><hr /><h2 id="交互设计不仅仅是复刻游戏">🎨 交互设计：不仅仅是复刻游戏</h2><p>作为一个“实验室”项目，<strong>TinyPulse</strong>拥有一套完整的黑金科技感 UI 方案：</p><ol type="1"><li><strong>启动加载页</strong>：利用 CSS 动画缓解 Wasm二进制文件下载时的“白屏焦虑”。</li><li><strong>双向通信系统</strong>：实现了 C++ 游戏得分实时穿透 Iframe容器，与父页面 JavaScript 同步，并利用 <code>localStorage</code>进行本地持久化存储。</li></ol><hr /><h2 id="结语">🏆 结语</h2><p><strong>TinyPulse</strong> 是我对 <strong>“底层性能 + 现代 Web部署”</strong> 的一次闭环实践。它证明了即便在浏览器中，我们依然可以通过C++ 找回那种掌控每一个像素、每一帧频率的自由。</p><blockquote><p><strong>项目体验地址</strong>：<ahref="https://www.google.com/search?q=https://jokerlove0626.github.io/TinyPulse/">https://jokerlove0626.github.io/TinyPulse/</a></p><p><strong>GitHub 仓库</strong>：<ahref="https://www.google.com/search?q=https://github.com/Jokerlove0626/TinyPulse">Jokerlove0626/TinyPulse</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术实践</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>WebAssembly</tag>
+      
+      <tag>Raylib</tag>
+      
+      <tag>游戏开发</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>从零开始：我的 Hexo 博客搭建之旅（完结篇）</title>
+    <link href="/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/"/>
+    <url>/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/</url>
+    
+    <content type="html"><![CDATA[<h2 id="搭建博客的初衷">📝 搭建博客的初衷</h2><p>在信息碎片化的时代，我为什么选择费力搭建一个独立博客？</p><ol type="1"><li><strong>构建知识体系</strong>：写给别人看是最好的学习方式（费曼学习法）。当我要把一个算法逻辑讲清楚时，我才真正掌握了它。</li><li><strong>拒绝“拿来主义”</strong>：在 AI时代，获取答案变得太容易，但思考的过程变得太稀缺。这里是我强制自己沉淀思考、拒绝直接复制粘贴的阵地。</li><li><strong>技术自由度</strong>：独立博客意味着我可以自由决定公式怎么显示、代码怎么高亮、评论怎么互动。这种“掌控感”是任何平台都给不了的。</li></ol><hr /><h2 id="核心架构方案">🛠 核心架构方案</h2><p>为了兼顾美观与功能，我最终锁定了这套黄金组合： -<strong>框架</strong>: <a href="https://hexo.io/">Hexo</a> -<strong>主题</strong>: <ahref="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a>(现代优雅的 Material Design 风格) - <strong>渲染引擎</strong>:<strong>Pandoc 3.8.3</strong>(放弃了不稳定的插件，采用专业级文档转换工具) -<strong>托管平台</strong>: GitHub Pages</p><hr /><h2 id="攻克数学公式渲染从报错到完美">🔥攻克数学公式渲染：从报错到完美</h2><p>这是搭建过程中最难的一关。最初使用默认渲染器时，LaTeX 的转义符号（如<code>_</code> 和 <code>\\</code>）经常被误处理，导致公式“炸裂”。</p><h3 id="为什么选择-pandoc">为什么选择 Pandoc？</h3><p>Hexo 默认的 Marked 引擎经常会把 LaTeX 的下划线误识别为 HTML斜体。经过反复测试，我采用了 <strong>Pandoc</strong>方案。它作为“文档转换界的瑞士军刀”，能原生解析 LaTeX语法，实现了零冲突渲染。</p><p><strong>渲染效果展示：</strong></p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</span></p><p>以及更复杂的矩阵运算：</p><p><span class="math display">$$\begin{pmatrix}1 &amp; 0 \\0 &amp; 1\end{pmatrix}$$</span></p><hr /><h2 id="部署与同步">🚀 部署与同步</h2><p>通过配置 Git 代理和 <code>hexo-deployer-git</code>插件，现在我只需一行命令即可将本地思考同步至全球：</p><p>```powershell hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术分享</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Fluid</tag>
+      
+      <tag>Pandoc</tag>
+      
+      <tag>LaTeX</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
