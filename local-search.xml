@@ -20,11 +20,11 @@
     
     <tags>
       
+      <tag>数据结构</tag>
+      
       <tag>算法</tag>
       
       <tag>C++</tag>
-      
-      <tag>数据结构</tag>
       
       <tag>二叉树</tag>
       
@@ -53,9 +53,9 @@
       
       <tag>算法</tag>
       
-      <tag>LeetCode</tag>
-      
       <tag>C++</tag>
+      
+      <tag>LeetCode</tag>
       
       <tag>双指针</tag>
       
@@ -84,9 +84,9 @@
       
       <tag>算法</tag>
       
-      <tag>LeetCode</tag>
-      
       <tag>C++</tag>
+      
+      <tag>LeetCode</tag>
       
       <tag>哈希表</tag>
       
@@ -117,9 +117,9 @@
       
       <tag>算法</tag>
       
-      <tag>LeetCode</tag>
-      
       <tag>C++</tag>
+      
+      <tag>LeetCode</tag>
       
       <tag>哈希表</tag>
       
@@ -150,9 +150,9 @@
       
       <tag>算法</tag>
       
-      <tag>LeetCode</tag>
-      
       <tag>C++</tag>
+      
+      <tag>LeetCode</tag>
       
       <tag>哈希表</tag>
       
@@ -194,11 +194,11 @@
   
   
   <entry>
-    <title>从零开始：我的 Hexo 博客搭建之旅（完结篇）</title>
+    <title>从零开始：我的 Hexo 博客搭建之旅</title>
     <link href="/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/"/>
     <url>/2025/12/29/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E6%88%91%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E6%97%85/</url>
     
-    <content type="html"><![CDATA[<h2 id="搭建博客的初衷">📝 搭建博客的初衷</h2><p>在信息碎片化的时代，我为什么选择费力搭建一个独立博客？</p><ol type="1"><li><strong>构建知识体系</strong>：写给别人看是最好的学习方式（费曼学习法）。当我要把一个算法逻辑讲清楚时，我才真正掌握了它。</li><li><strong>拒绝“拿来主义”</strong>：在 AI时代，获取答案变得太容易，但思考的过程变得太稀缺。这里是我强制自己沉淀思考、拒绝直接复制粘贴的阵地。</li><li><strong>技术自由度</strong>：独立博客意味着我可以自由决定公式怎么显示、代码怎么高亮、评论怎么互动。这种“掌控感”是任何平台都给不了的。</li></ol><hr /><h2 id="核心架构方案">🛠 核心架构方案</h2><p>为了兼顾美观与功能，我最终锁定了这套黄金组合： -<strong>框架</strong>: <a href="https://hexo.io/">Hexo</a> -<strong>主题</strong>: <ahref="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a>(现代优雅的 Material Design 风格) - <strong>渲染引擎</strong>:<strong>Pandoc 3.8.3</strong>(放弃了不稳定的插件，采用专业级文档转换工具) -<strong>托管平台</strong>: GitHub Pages</p><hr /><h2 id="攻克数学公式渲染从报错到完美">🔥攻克数学公式渲染：从报错到完美</h2><p>这是搭建过程中最难的一关。最初使用默认渲染器时，LaTeX 的转义符号（如<code>_</code> 和 <code>\\</code>）经常被误处理，导致公式“炸裂”。</p><h3 id="为什么选择-pandoc">为什么选择 Pandoc？</h3><p>Hexo 默认的 Marked 引擎经常会把 LaTeX 的下划线误识别为 HTML斜体。经过反复测试，我采用了 <strong>Pandoc</strong>方案。它作为“文档转换界的瑞士军刀”，能原生解析 LaTeX语法，实现了零冲突渲染。</p><p><strong>渲染效果展示：</strong></p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</span></p><p>以及更复杂的矩阵运算：</p><p><span class="math display">$$\begin{pmatrix}1 &amp; 0 \\0 &amp; 1\end{pmatrix}$$</span></p><hr /><h2 id="部署与同步">🚀 部署与同步</h2><p>通过配置 Git 代理和 <code>hexo-deployer-git</code>插件，现在我只需一行命令即可将本地思考同步至全球：</p><p>```powershell hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>]]></content>
+    <content type="html"><![CDATA[<hr /><p>Hello大家好，这里是小丑爱。</p><p>在信息碎片化的时代，搭建一个独立博客是我沉淀思考、拒绝直接复制粘贴的阵地。今天咱们直接上硬核干货，手把手带你完成从环境搭建到公式渲染的全过程。</p><hr /><h2 id="第一步地基建设-环境准备">🛠 第一步：地基建设 (环境准备)</h2><p>在开始之前，请确保你的电脑已经安装了 <strong>Node.js</strong> (建议LTS 版本) 和 <strong>Git</strong>。</p><ol type="1"><li><p><strong>安装 Hexo 框架</strong>：打开终端，输入以下命令全局安装： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></td></tr></table></figure></p></li><li><p><strong>初始化项目</strong>：</p></li></ol><p>​ 找一个你喜欢的文件夹（例如 <code>blog</code>），执行：</p><p>Bash</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">hexo init <span class="hljs-keyword">blog</span><br><span class="hljs-keyword"></span>cd <span class="hljs-keyword">blog</span><br><span class="hljs-keyword"></span>npm <span class="hljs-keyword">install</span><br></code></pre></td></tr></table></figure><p>​ 至此，你的博客本地雏形已经搭建完成。</p><hr /><h2 id="第二步为博客注入灵魂-fluid-主题">🎨 第二步：为博客注入灵魂(Fluid 主题)</h2><p>我选择 <strong>Fluid</strong> 是因为它现代优雅的 Material Design风格以及极其详尽的配置文档。</p><ol type="1"><li><p><strong>安装主题</strong>：</p><p>在博客根目录下执行：</p><p>Bash</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-theme-fluid</span><br></code></pre></td></tr></table></figure></li><li><p><strong>指定主题</strong>：</p><p>打开根目录下的 <code>_config.yml</code>（站点配置文件），修改：</p><p>YAML</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid<br></code></pre></td></tr></table></figure></li><li><p><strong>创建关于页</strong>（Fluid 要求）：</p><p>Bash</p><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">hexo <span class="hljs-keyword">new</span> page about<br></code></pre></td></tr></table></figure><p>然后在 <code>source/about/index.md</code>中编辑你的个人简介。</p></li></ol><hr /><h2 id="第三步核心攻克-pandoc-与-latex">🔥 第三步：核心攻克 (Pandoc 与LaTeX)</h2><p>这是搭建过程中最难的一关。Hexo 默认的 Marked 引擎经常会把 LaTeX的下划线 <code>_</code> 误识别为 HTML斜体，导致公式“炸裂”。我选择了专业级的 <strong>Pandoc</strong>方案。</p><h3 id="卸载默认引擎">1. 卸载默认引擎</h3><p>Bash</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm uninstall hexo-renderer-marked <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><h3 id="安装-pandoc-渲染器">2. 安装 Pandoc 渲染器</h3><p>首先确保你电脑系统里已经安装了 <ahref="https://pandoc.org/installing.html">Pandoc 软件</a>（建议3.8.3+），然后在博客目录下安装插件：</p><p>Bash</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-renderer-pandoc <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><h3 id="开启数学公式">3. 开启数学公式</h3><p>在 <code>_config.fluid.yml</code>（主题配置文件）中，找到<code>post</code> 部分，确保开启：</p><p>YAML</p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">post:</span><br>  <span class="hljs-params">math:</span><br>    <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-params">specific:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># 仅在 md 头部标记 math: true 的文章中加载，提高渲染效率</span><br></code></pre></td></tr></table></figure><h3 id="效果展示">4. 效果展示</h3><p>现在你可以随心所欲书写公式了，比如求根公式：</p><p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$$</span></p><hr /><h2 id="第四步同步至全球-github-pages">🚀 第四步：同步至全球 (GitHubPages)</h2><p>通过一行命令，即可将本地思考同步至全球。</p><ol type="1"><li><p><strong>安装部署插件</strong>：</p><p>Bash</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure></li><li><p><strong>配置 GitHub 仓库</strong>：</p><p>在根目录 <code>_config.yml</code> 末尾修改：</p><p>YAML</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repo:</span> git@github.com:你的用户名/你的用户名.github.io.git<br><span class="hljs-symbol">  branch:</span> main<br></code></pre></td></tr></table></figure></li><li><p><strong>一键部署</strong>：</p><p>Bash</p><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas">hexo clean <span class="hljs-variable">&amp;&amp;</span> hexo g <span class="hljs-variable">&amp;&amp;</span> hexo d<br></code></pre></td></tr></table></figure></li></ol><hr /><h2 id="写在最后">📝 写在最后</h2><p>博客搭建不是终点，<strong>持续的思考和输出</strong>才是。希望这篇实战指南能帮你少走弯路。</p><p>这里是小丑爱，我们下次见！</p>]]></content>
     
     
     <categories>
